@@ -39,6 +39,12 @@ fi
 
 start()
 {
+  if [ -f $PIDFILE ]; then
+    if [ -d "/proc/`cat $PIDFILE`" ]; then
+      echo "mongo process is running::`cat $PIDFILE`"
+      exit 1
+    fi
+  fi  
   echo -n $"Starting <%= @provides %>: "
   daemon --user "$DAEMON_USER" $NUMACTL $DAEMON $DAEMON_OPTS
   RETVAL=$?
