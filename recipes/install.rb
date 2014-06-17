@@ -68,6 +68,12 @@ when "rhel"
     # Add --nogpgcheck option when package is signed
     # see: https://jira.mongodb.org/browse/SERVER-8770
     packager_opts = "--nogpgcheck"
+    # Dirty hack to install version 2.4.x. I don't know if it works with 2.3.x.
+    # See http://docs.mongodb.org/v2.4/tutorial/install-mongodb-on-red-hat-centos-or-fedora-linux/#install-packages
+    # and https://jira.mongodb.org/browse/SERVER-13563
+    if node[:mongodb][:package_version].start_with?("2.4") 
+      packager_opts += "--exclude mongodb-org,mongodb-org-server"
+    end
 end
 
 # install
