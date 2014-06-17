@@ -72,7 +72,7 @@ when "rhel"
     # See http://docs.mongodb.org/v2.4/tutorial/install-mongodb-on-red-hat-centos-or-fedora-linux/#install-packages
     # and https://jira.mongodb.org/browse/SERVER-13563
     if node[:mongodb][:package_version].start_with?("2.4") 
-      packager_opts += "--exclude mongodb-org,mongodb-org-server"
+      packager_opts += " --exclude mongodb-org,mongodb-org-server"
     end
 end
 
